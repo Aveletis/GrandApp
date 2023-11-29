@@ -1,14 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using GrandApp.Models.Data;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 
-namespace GrandApp.Models.Data
+namespace GrandApp.ViewModels.Booking
 {
-    public class Booking
+    public class CreateBookingViewModel
     {
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Display(Name = "ИД")]
-        public int ID { get; set; }
-
         [Required(ErrorMessage = "Введите дату заезда")]
         [Display(Name = "Дата заезда")]
         public DateTime ArrivaldateTime { get; set; }
@@ -27,7 +24,6 @@ namespace GrandApp.Models.Data
 
         [Required]
         public string IdUser { get; set; }
-
 
         [ForeignKey("IdUser")]
         public User User { get; set; }

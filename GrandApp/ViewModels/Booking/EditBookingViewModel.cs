@@ -1,13 +1,12 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using GrandApp.Models.Data;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 
-namespace GrandApp.Models.Data
+namespace GrandApp.ViewModels.Booking
 {
-    public class Booking
+    public class EditBookingViewModel
     {
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Display(Name = "ИД")]
-        public int ID { get; set; }
+        public byte Id { get; set; }
 
         [Required(ErrorMessage = "Введите дату заезда")]
         [Display(Name = "Дата заезда")]

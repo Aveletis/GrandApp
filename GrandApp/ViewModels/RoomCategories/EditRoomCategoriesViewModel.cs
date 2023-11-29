@@ -1,13 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
-namespace GrandApp.Models.Data
+namespace GrandApp.ViewModels.RoomCategories
 {
-    public class RoomCategory
+    public class EditRoomCategoriesViewModel
     {
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Display(Name = "ИД")]
-        public byte ID { get; set; }
+        public byte Id { get; set; }
 
         [Required(ErrorMessage = "Введите категорию")]
         [Display(Name = "Категория")]

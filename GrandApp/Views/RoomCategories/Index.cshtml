@@ -1,0 +1,57 @@
+﻿@model IEnumerable<GrandApp.Models.Data.RoomCategory>
+
+@{
+    ViewData["Title"] = "Категории";
+}
+
+ <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-area="" asp-controller="Home" asp-action="Index">Главная</a></li>
+        <li class="breadcrumb-item"><a asp-area="" asp-controller="Bookings" asp-action="Index">Бронирование</a></li>
+        <li class="breadcrumb-item active">Категории</li>
+    </ol>
+</nav> 
+<h2>Категории</h2>
+
+<h6>
+    <a class="btn text-dark" asp-action="Create">
+        <i class="fa-solid fa-plus"></i> Создать
+    </a>
+</h6>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Category)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Category)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+                <td class="noUnderlining">
+                <a asp-action="Edit" asp-route-id="@item.ID" title="Редактировать">
+                    <i class="fa-solid fa-pencil fa-lg"></i>
+                </a>
+                <a asp-action="Details" asp-route-id="@item.ID" title="Подробнее">
+                    <i class="fa-regular fa-eye fa-lg"></i>
+                </a>
+                <a asp-action="Delete" asp-route-id="@item.ID" title="Удалить">
+                    <i class="far fa-minus-square"></i>
+                </a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

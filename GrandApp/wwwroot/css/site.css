@@ -20,3 +20,12 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.noUnderlining {
+    display: flex;
+    gap: 10px;
+}
+
+.noUnderlining a {
+    text-decoration: none;
+}

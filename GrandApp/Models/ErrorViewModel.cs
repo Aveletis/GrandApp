@@ -1,4 +1,4 @@
-namespace GrandApp.Models.Data
+namespace GrandApp.Models
 {
     public class ErrorViewModel
     {

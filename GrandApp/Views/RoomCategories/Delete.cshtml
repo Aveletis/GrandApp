@@ -1,14 +1,21 @@
 ﻿@model GrandApp.Models.Data.RoomCategory
 
 @{
-    ViewData["Title"] = "Delete";
+    ViewData["Title"] = "Удаление";
 }
 
-<h1>Delete</h1>
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Главная</a></li>
+        <li class="breadcrumb-item"><a asp-controller="RoomCategories" asp-action="Index">Категории</a></li>
+        <li class="breadcrumb-item active">Удаление</li>
+    </ol>
+</nav>
 
-<h3>Are you sure you want to delete this?</h3>
+<h1>Удаление</h1>
+
 <div>
-    <h4>RoomCategory</h4>
+    <h3>Вы уверены, что желаете удалить элемент? Восстановить будет невозможно</h3>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
@@ -28,6 +35,5 @@
     <form asp-action="Delete">
         <input type="hidden" asp-for="ID" />
         <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
     </form>
 </div>

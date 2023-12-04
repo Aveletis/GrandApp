@@ -1,10 +1,18 @@
 ﻿@model GrandApp.Models.Data.RoomCategory
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Просмотр деталей";
 }
 
-<h1>Details</h1>
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Главная</a></li>
+        <li class="breadcrumb-item"><a asp-controller="RoomCategories" asp-action="Index">Категории</a></li>
+        <li class="breadcrumb-item active">Просмотр деталей</li>
+    </ol>
+</nav>
+
+<h1>Просмотр деталей</h1>
 
 <div>
     <h4>RoomCategory</h4>
@@ -26,5 +34,4 @@
 </div>
 <div>
     <a asp-action="Edit" asp-route-id="@Model?.ID">Edit</a> |
-    <a asp-action="Index">Back to List</a>
 </div>

@@ -1,12 +1,20 @@
-﻿@model GrandApp.ViewModels.RoomCategories.CreateRoomCategoriesViewModel
+﻿@model GrandApp.ViewModels.RoomCategories.CreateRoomsViewModel
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Создание";
 }
 
-<h1>Create</h1>
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Главная</a></li>
+        <li class="breadcrumb-item"><a asp-controller="RoomCategories" asp-action="Index">Категории</a></li>
+        <li class="breadcrumb-item active">Создание</li>
+    </ol>
+</nav>
 
-<h4>RoomCategory</h4>
+<h1>Создание</h1>
+
+<h4>Категории</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -27,10 +35,6 @@
             </div>
         </form>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {

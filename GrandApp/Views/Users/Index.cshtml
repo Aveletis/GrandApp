@@ -1,0 +1,68 @@
+﻿@model IEnumerable<GrandApp.Models.Data.User>
+
+@{
+    ViewData["Title"] = "Пользователи";
+}
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-area="" asp-controller="Home" asp-action="Index">Главная</a></li>
+        <li class="breadcrumb-item"><a asp-area="" asp-controller="Rooms" asp-action="Index">Номера</a></li>
+        <li class="breadcrumb-item"><a asp-area="" asp-controller="RoomCategories" asp-action="Index">Категории</a></li>
+        <li class="breadcrumb-item active">Пользователи</li>
+    </ol>
+</nav>
+<h2>Пользователи</h2>
+
+<h6>
+    <a class="btn text-dark" asp-action="Create">
+        <i class="fa-solid fa-plus"></i> Создать
+    </a>
+</h6>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FirstName)
+                </td>
+                <td class="noUnderlining">
+                    <a asp-action="Edit" asp-route-id="@item.Id" title="Редактировать">
+                        <i class="fa-solid fa-pencil fa-lg"></i>
+                    </a>
+                    <a asp-action="ChangePassword" asp-route-id="@item.Id" title="Сменить пароль">
+                        <i class="fa-solid fa-key"></i>
+                    </a>
+                    <a asp-action="EditRoles" asp-route-userid="@item.Id" title="Права доступа">
+                        <i class="fa-solid fa-arrow-down-up-lock"></i>
+                    </a>
+                    <a asp-action="Delete" asp-route-id="@item.Id" title="Удалить">
+                        <i class="far fa-minus-square"></i>
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

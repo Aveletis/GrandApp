@@ -2,7 +2,7 @@
 
 namespace GrandApp.ViewModels.RoomCategories
 {
-    public class CreateRoomCategoriesViewModel
+    public class CreateRoomsViewModel
     {
         [Required(ErrorMessage = "Введите категорию")]
         [Display(Name = "Категория")]

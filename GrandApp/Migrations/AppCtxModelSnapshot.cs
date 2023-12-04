@@ -22,39 +22,6 @@ namespace GrandApp.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("GrandApp.Models.Data.Booking", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
-
-                    b.Property<DateTime>("ArrivaldateTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("DeparturedateTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<byte>("IdRoomID")
-                        .HasColumnType("tinyint");
-
-                    b.Property<string>("IdUser")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<byte>("NumberGuests")
-                        .HasColumnType("tinyint");
-
-                    b.HasKey("ID");
-
-                    b.HasIndex("IdRoomID");
-
-                    b.HasIndex("IdUser");
-
-                    b.ToTable("Booking");
-                });
-
             modelBuilder.Entity("GrandApp.Models.Data.Room", b =>
                 {
                     b.Property<byte>("ID")
@@ -87,7 +54,7 @@ namespace GrandApp.Migrations
 
                     b.HasIndex("IdCategoryID");
 
-                    b.ToTable("Room");
+                    b.ToTable("Rooms");
                 });
 
             modelBuilder.Entity("GrandApp.Models.Data.RoomCategory", b =>
@@ -130,6 +97,10 @@ namespace GrandApp.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
 
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("LastName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -139,14 +110,6 @@ namespace GrandApp.Migrations
 
                     b.Property<DateTimeOffset?>("LockoutEnd")
                         .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Nikname")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256)
@@ -319,25 +282,6 @@ namespace GrandApp.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens", (string)null);
-                });
-
-            modelBuilder.Entity("GrandApp.Models.Data.Booking", b =>
-                {
-                    b.HasOne("GrandApp.Models.Data.Room", "IdRoom")
-                        .WithMany()
-                        .HasForeignKey("IdRoomID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("GrandApp.Models.Data.User", "User")
-                        .WithMany()
-                        .HasForeignKey("IdUser")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("IdRoom");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("GrandApp.Models.Data.Room", b =>

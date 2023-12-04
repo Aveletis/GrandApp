@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace GrandApp.Migrations
 {
     /// <inheritdoc />
-    public partial class last : Migration
+    public partial class One : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -31,8 +31,7 @@ namespace GrandApp.Migrations
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Nikname = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -174,7 +173,7 @@ namespace GrandApp.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Room",
+                name: "Rooms",
                 columns: table => new
                 {
                     ID = table.Column<byte>(type: "tinyint", nullable: false),
@@ -188,40 +187,11 @@ namespace GrandApp.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Room", x => x.ID);
+                    table.PrimaryKey("PK_Rooms", x => x.ID);
                     table.ForeignKey(
-                        name: "FK_Room_RoomCategories_IdCategoryID",
+                        name: "FK_Rooms_RoomCategories_IdCategoryID",
                         column: x => x.IdCategoryID,
                         principalTable: "RoomCategories",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Booking",
-                columns: table => new
-                {
-                    ID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    ArrivaldateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    DeparturedateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    NumberGuests = table.Column<byte>(type: "tinyint", nullable: false),
-                    IdRoomID = table.Column<byte>(type: "tinyint", nullable: false),
-                    IdUser = table.Column<string>(type: "nvarchar(450)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Booking", x => x.ID);
-                    table.ForeignKey(
-                        name: "FK_Booking_AspNetUsers_IdUser",
-                        column: x => x.IdUser,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Booking_Room_IdRoomID",
-                        column: x => x.IdRoomID,
-                        principalTable: "Room",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -266,18 +236,8 @@ namespace GrandApp.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Booking_IdRoomID",
-                table: "Booking",
-                column: "IdRoomID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Booking_IdUser",
-                table: "Booking",
-                column: "IdUser");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Room_IdCategoryID",
-                table: "Room",
+                name: "IX_Rooms_IdCategoryID",
+                table: "Rooms",
                 column: "IdCategoryID");
         }
 
@@ -300,16 +260,13 @@ namespace GrandApp.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Booking");
+                name: "Rooms");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
-
-            migrationBuilder.DropTable(
-                name: "Room");
 
             migrationBuilder.DropTable(
                 name: "RoomCategories");

@@ -1,13 +1,9 @@
-﻿using Microsoft.AspNetCore.Identity;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace GrandApp.Models.Data
+namespace GrandApp.ViewModels.Room
 {
-    public class Room
+    public class CreateRoomsViewModel
     {
-        public byte ID { get; set; }
-
         [Required(ErrorMessage = "Введите номер")]
         [Display(Name = "Номер")]
         public int Number { get; set; }
@@ -33,11 +29,7 @@ namespace GrandApp.Models.Data
         public string Description { get; set; }
 
         [Required]
-        [Display(Name = "Категория")]
+        [Display(Name = "Категория номера")]
         public byte IdRoomCategory { get; set; }
-
-        [Display(Name = "Категория")]
-        [ForeignKey("IdRoomCategory")]
-        public RoomCategory RoomCategory { get; set; }
     }
 }

@@ -1,132 +1,143 @@
 ﻿using GrandApp.Models;
 using GrandApp.Models.Data;
-using GrandApp.ViewModels.RoomCategories;
+using GrandApp.ViewModels.Room;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace GrandApp.Controllers
 {
-    public class RoomCategoriesController : Controller
+    public class RoomsController : Controller
     {
         private readonly AppCtx _context;
 
-        public RoomCategoriesController(AppCtx context)
+        public RoomsController(AppCtx context)
         {
             _context = context;
         }
 
-        // GET: RoomCategories
+        // GET: Rooms
         public async Task<IActionResult> Index()
         {
-            var appCtx = _context.RoomCategories
-                .OrderBy(f => f.Category);
+            var appCtx = _context.Rooms
+               .OrderBy(f => f.Number);
 
             return View(await appCtx.ToListAsync());
-            /* return _context.RoomCategories != null ? 
-                           View(await _context.RoomCategories.ToListAsync()) :
-                           Problem("Entity set 'AppCtx.RoomCategories'  is null.");*/
         }
 
-        // GET: RoomCategories/Details/5
+        // GET: Rooms/Details/5
         public async Task<IActionResult> Details(byte? id)
         {
-            if (id == null || _context.RoomCategories == null)
+            if (id == null || _context.Rooms == null)
             {
                 return NotFound();
             }
 
-            var RoomCategories = await _context.RoomCategories
+            var Rooms = await _context.Rooms
                 .FirstOrDefaultAsync(m => m.ID == id);
-            if (RoomCategories == null)
+            if (Rooms == null)
             {
                 return NotFound();
             }
 
-            return View(RoomCategories);
+            return View(Rooms);
         }
 
-        // GET: RoomCategories/Create
+        // GET: Rooms/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: RoomCategories/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(CreateRoomsViewModel model)
         {
-            if (_context.RoomCategories
-                .Where(f => f.Category == model.Category)
+            if (_context.Rooms
+                .Where(f => f.Number == model.Number)
                 .FirstOrDefault() != null)
             {
-                ModelState.AddModelError("", "Введенная категория уже существует");
+                ModelState.AddModelError("", "Введенная комната уже существует");
             }
 
             if (ModelState.IsValid)
             {
-                RoomCategory category = new()
+                Room room = new()
                 {
-                    Category = model.Category,
-                    Description = model.Description
+                    Number = model.Number,
+                    Image = model.Image,
+                    Floor = model.Floor,
+                    NumberGuests = model.NumberGuests,
+                    Square = model.Square,
+                    Description = model.Description,
+                    IdRoomCategory = model.IdRoomCategory
                 };
 
-                _context.Add(category);
+                _context.Add(room);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             return View(model);
         }
 
-        // GET: RoomCategories/Edit/5
+        // GET: Rooms/Edit/5
         public async Task<IActionResult> Edit(byte? id)
         {
-            if (id == null || _context.RoomCategories == null)
+            if (id == null || _context.Rooms == null)
             {
                 return NotFound();
             }
 
-            var roomCategory = await _context.RoomCategories.FindAsync(id);
-            if (roomCategory == null)
+            var room = await _context.Rooms.FindAsync(id);
+            if (room == null)
             {
                 return NotFound();
             }
 
             EditRoomsViewModel model = new()
             {
-                Id = roomCategory.ID,
-                Category = roomCategory.Category,
-                Description = roomCategory.Description
+                Id = room.ID,
+                Number = room.Number,
+                Image = room.Image,
+                Floor = room.Floor,
+                NumberGuests = room.NumberGuests,
+                Square = room.Square,
+                Description = room.Description,
+                IdRoomCategory = room.IdRoomCategory
             };
             return View(model);
         }
 
-        // POST: RoomCategories/Edit/5
+        // POST: Rooms/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(byte id, EditRoomsViewModel model)
         {
-            RoomCategory category = await _context.RoomCategories.FindAsync(id);
+            Room room = await _context.Rooms.FindAsync(id);
 
-            if (_context.RoomCategories
-                .Where(f => f.Category == model.Category && f.ID != model.Id)
+            if (_context.Rooms
+                .Where(f => f.Number == model.Number && f.ID != model.Id)
                 .FirstOrDefault() != null)
             {
-                ModelState.AddModelError("", "Введенная категория уже существует");
+                ModelState.AddModelError("", "Введенная комната уже существует");
             }
 
             if (ModelState.IsValid)
             {
                 try
                 {
-                    category.Category = model.Category;
-                    category.Description = model.Description;
-                    _context.Update(category);
+                    room.Number = model.Number;
+                    room.Image = model.Image;
+                    room.Floor = model.Floor;
+                    room.NumberGuests = model.NumberGuests;
+                    room.Square = model.Square;
+                    room.Description = model.Description;
+                    room.IdRoomCategory = model.IdRoomCategory;
+                    _context.Update(room);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!RoomCategoryExists(category.ID))
+                    if (!RoomExists(room.ID))
                     {
                         return NotFound();
                     }
@@ -140,7 +151,7 @@ namespace GrandApp.Controllers
             return View(model);
         }
 
-        // GET: RoomCategories/Delete/5
+        // GET: Rooms/Delete/5
         public async Task<IActionResult> Delete(byte? id)
         {
             if (id == null || _context.RoomCategories == null)
@@ -158,28 +169,28 @@ namespace GrandApp.Controllers
             return View(roomCategory);
         }
 
-        // POST: RoomCategories/Delete/5
+        // POST: Rooms/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(byte id)
         {
-            if (_context.RoomCategories == null)
+            if (_context.Rooms == null)
             {
-                return Problem("Entity set 'AppCtx.RoomCategory'  is null.");
+                return Problem("Entity set 'AppCtx.Rooms'  is null.");
             }
-            var roomCategory = await _context.RoomCategories.FindAsync(id);
-            if (roomCategory != null)
+            var room = await _context.Rooms.FindAsync(id);
+            if (room != null)
             {
-                _context.RoomCategories.Remove(roomCategory);
+                _context.Rooms.Remove(room);
             }
             
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool RoomCategoryExists(byte id)
+        private bool RoomExists(byte id)
         {
-          return (_context.RoomCategories?.Any(e => e.ID == id)).GetValueOrDefault();
+          return (_context.Rooms?.Any(e => e.ID == id)).GetValueOrDefault();
         }
     }
 }

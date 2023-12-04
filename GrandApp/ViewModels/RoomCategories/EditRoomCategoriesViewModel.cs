@@ -2,7 +2,7 @@
 
 namespace GrandApp.ViewModels.RoomCategories
 {
-    public class EditRoomCategoriesViewModel
+    public class EditRoomsViewModel
     {
         public byte Id { get; set; }
 

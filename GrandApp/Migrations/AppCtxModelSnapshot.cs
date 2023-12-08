@@ -24,7 +24,7 @@ namespace GrandApp.Migrations
 
             modelBuilder.Entity("GrandApp.Models.Data.Room", b =>
                 {
-                    b.Property<byte>("ID")
+                    b.Property<byte>("Id")
                         .HasColumnType("tinyint");
 
                     b.Property<string>("Description")
@@ -50,7 +50,7 @@ namespace GrandApp.Migrations
                     b.Property<double>("Square")
                         .HasColumnType("float");
 
-                    b.HasKey("ID");
+                    b.HasKey("Id");
 
                     b.HasIndex("IdCategoryID");
 
@@ -59,11 +59,11 @@ namespace GrandApp.Migrations
 
             modelBuilder.Entity("GrandApp.Models.Data.RoomCategory", b =>
                 {
-                    b.Property<byte>("ID")
+                    b.Property<byte>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("tinyint");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<byte>("ID"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<byte>("Id"));
 
                     b.Property<string>("Category")
                         .IsRequired()
@@ -73,7 +73,7 @@ namespace GrandApp.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("ID");
+                    b.HasKey("Id");
 
                     b.ToTable("RoomCategories");
                 });

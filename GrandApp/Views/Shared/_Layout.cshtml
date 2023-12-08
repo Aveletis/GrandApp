@@ -12,7 +12,8 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3 fixed-top">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            @* <-- УБРАНО ФИКСЕД ТОП fixed-top FFFFFFFFFFFFFFFFFFFFFFFFF *@
             <div class="container">
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
@@ -39,22 +40,31 @@
 
                                 @*если пользователь с ролью админ, то он получает доступ к работе со всеми пользователями системы*@
                                 @* @if (User.Claims.Where(c => c.Type == System.Security.Claims.ClaimTypes.Role).Select(s => s.Value).Contains("admin"))
-                                {
-                                    <li class="nav-item">
-                                        <a class="nav-link text-dark" asp-controller="Users" asp-action="Index" title="Пользователи">
-                                            <i class="far fa-user"></i>  Пользователи
-                                        </a>
-                                    </li>
-                                } *@
+                        {
+                        <li class="nav-item">
+                        <a class="nav-link text-dark" asp-controller="Users" asp-action="Index" title="Пользователи">
+                        <i class="far fa-user"></i>  Пользователи
+                        </a>
+                        </li>
+                        } *@
 
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Главная</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link text-dark" asp-area="" asp-controller="Users" asp-action="Index">Пользователи</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link text-dark" asp-area="" asp-controller="RoomCategories" asp-action="Index">Категории</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Rooms" asp-action="Index">Комнаты</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="RoomPrices" asp-action="Index">Цены</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Reservations" asp-action="Index">Бронь</a>
                                 </li>
                             </ul>
 

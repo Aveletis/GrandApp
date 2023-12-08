@@ -36,7 +36,7 @@ namespace GrandApp.Controllers
             }
 
             var RoomCategories = await _context.RoomCategories
-                .FirstOrDefaultAsync(m => m.ID == id);
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (RoomCategories == null)
             {
                 return NotFound();
@@ -94,7 +94,7 @@ namespace GrandApp.Controllers
 
             EditRoomsViewModel model = new()
             {
-                Id = roomCategory.ID,
+                Id = roomCategory.Id,
                 Category = roomCategory.Category,
                 Description = roomCategory.Description
             };
@@ -109,7 +109,7 @@ namespace GrandApp.Controllers
             RoomCategory category = await _context.RoomCategories.FindAsync(id);
 
             if (_context.RoomCategories
-                .Where(f => f.Category == model.Category && f.ID != model.Id)
+                .Where(f => f.Category == model.Category && f.Id != model.Id)
                 .FirstOrDefault() != null)
             {
                 ModelState.AddModelError("", "Введенная категория уже существует");
@@ -126,7 +126,7 @@ namespace GrandApp.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!RoomCategoryExists(category.ID))
+                    if (!RoomCategoryExists(category.Id))
                     {
                         return NotFound();
                     }
@@ -149,7 +149,7 @@ namespace GrandApp.Controllers
             }
 
             var roomCategory = await _context.RoomCategories
-                .FirstOrDefaultAsync(m => m.ID == id);
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (roomCategory == null)
             {
                 return NotFound();
@@ -172,14 +172,14 @@ namespace GrandApp.Controllers
             {
                 _context.RoomCategories.Remove(roomCategory);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool RoomCategoryExists(byte id)
         {
-          return (_context.RoomCategories?.Any(e => e.ID == id)).GetValueOrDefault();
+            return (_context.RoomCategories?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

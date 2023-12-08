@@ -6,7 +6,7 @@ namespace GrandApp.ViewModels.Users
     {
         [Required(ErrorMessage = "Введите E-mail")]
         [Display(Name = "E-mail")]
-        //[DataType(DataType.EmailAddress, ErrorMessage = "Введите корретный E-mail")]
+        [DataType(DataType.EmailAddress, ErrorMessage = "Введите корретный E-mail")]
         public string Email { get; set; }
 
         [Required(ErrorMessage = "Введите пароль")]
@@ -21,5 +21,9 @@ namespace GrandApp.ViewModels.Users
         [Required(ErrorMessage = "Введите имя")]
         [Display(Name = "Имя")]
         public string FirstName { get; set; }
+
+        [Required(ErrorMessage = "Введите никнейм")]
+        [Display(Name = "Никнейм")]
+        public string Nickname { get; set; }
     }
 }

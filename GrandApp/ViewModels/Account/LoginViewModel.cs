@@ -4,10 +4,9 @@ namespace GrandApp.ViewModels.Account
 {
     public class LoginViewModel
     {
-        [Required(ErrorMessage = "Введите E-mail")]
-        [Display(Name = "E-mail")]
-        [DataType(DataType.EmailAddress)]
-        public string Email { get; set; }
+        [Required(ErrorMessage = "Введите никнейм")]
+        [Display(Name = "Никнейм")]
+        public string Nickname { get; set; }
 
         [Required(ErrorMessage = "Введите пароль")]
         [Display(Name = "Пароль")]

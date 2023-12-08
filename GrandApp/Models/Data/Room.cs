@@ -1,12 +1,13 @@
-﻿using Microsoft.AspNetCore.Identity;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace GrandApp.Models.Data
 {
     public class Room
     {
-        public byte ID { get; set; }
+        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Display(Name = "ИД")]
+        public byte Id { get; set; }
 
         [Required(ErrorMessage = "Введите номер")]
         [Display(Name = "Номер")]
@@ -39,5 +40,8 @@ namespace GrandApp.Models.Data
         [Display(Name = "Категория")]
         [ForeignKey("IdRoomCategory")]
         public RoomCategory RoomCategory { get; set; }
+
+        [Required]
+        public ICollection<Reservation> Reservations { get; set; }
     }
 }

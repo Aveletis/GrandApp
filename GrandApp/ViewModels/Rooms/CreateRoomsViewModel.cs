@@ -1,11 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace GrandApp.ViewModels.Room
+namespace GrandApp.ViewModels.Rooms
 {
-    public class EditRoomsViewModel
+    public class CreateRoomsViewModel
     {
-        public int Id { get; set; }
-
         [Required(ErrorMessage = "Введите номер")]
         [Display(Name = "Номер")]
         public int Number { get; set; }

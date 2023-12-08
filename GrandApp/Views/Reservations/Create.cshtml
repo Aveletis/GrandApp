@@ -1,0 +1,51 @@
+﻿@model GrandApp.ViewModels.Reservations.CreateReservationsViewModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Reservation</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="ArrivaldateTime" class="control-label"></label>
+                <input asp-for="ArrivaldateTime" class="form-control" />
+                <span asp-validation-for="ArrivaldateTime" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DeparturedateTime" class="control-label"></label>
+                <input asp-for="DeparturedateTime" class="form-control" />
+                <span asp-validation-for="DeparturedateTime" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NumberGuests" class="control-label"></label>
+                <input asp-for="NumberGuests" class="form-control" />
+                <span asp-validation-for="NumberGuests" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IdRoom" class="control-label"></label>
+                <select asp-for="IdRoom" class ="form-control" asp-items="ViewBag.IdRoom"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="IdUser" class="control-label"></label>
+                <select asp-for="IdUser" class ="form-control" asp-items="ViewBag.IdUser"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

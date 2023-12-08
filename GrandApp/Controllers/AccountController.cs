@@ -37,7 +37,8 @@ namespace GrandApp.Controllers
                     LastName = model.LastName,
                     FirstName = model.FirstName,
                     Email = model.Email,
-                    UserName = model.Email
+                    UserName = model.Email,
+                    Nickname = model.Nickname
                 };
 
                 // добавляем пользователя
@@ -72,7 +73,7 @@ namespace GrandApp.Controllers
             /*if (ModelState.IsValid)
             {*/
             var result =
-                await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, false);
+                await _signInManager.PasswordSignInAsync(model.Nickname, model.Password, model.RememberMe, false);
 
             if (result.Succeeded)
             {

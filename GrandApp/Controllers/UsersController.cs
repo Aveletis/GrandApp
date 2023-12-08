@@ -1,5 +1,5 @@
-﻿using GrandApp.Models.Data;
-using GrandApp.Models;
+﻿using GrandApp.Models;
+using GrandApp.Models.Data;
 using GrandApp.ViewModels.Users;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -19,7 +19,7 @@ namespace GrandApp.Controllers
         public async Task<IActionResult> Index()
         {
             var appCtx = _context.Users
-                .OrderBy(f => f.FirstName);
+                .OrderBy(f => f.Nickname);
 
             return View(await appCtx.ToListAsync());
         }
@@ -36,7 +36,7 @@ namespace GrandApp.Controllers
         public async Task<IActionResult> Create(CreateUsersViewModel model)
         {
             if (_context.Users
-                .Where(f => f.Email == model.Email)
+                .Where(f => f.Email == model.Email || f.Nickname == model.Nickname)
                 .FirstOrDefault() != null)
             {
                 ModelState.AddModelError("", "Введенный пользователь уже существует");
@@ -49,7 +49,8 @@ namespace GrandApp.Controllers
                     Email = model.Email,
                     UserName = model.Email,
                     LastName = model.LastName,
-                    FirstName = model.FirstName
+                    FirstName = model.FirstName,
+                    Nickname = model.Nickname
                 };
 
                 _context.Add(user);
@@ -78,7 +79,8 @@ namespace GrandApp.Controllers
                 Id = user.Id,
                 Email = user.Email,
                 LastName = user.LastName,
-                FirstName = user.FirstName
+                FirstName = user.FirstName,
+                Nickname = user.Nickname
             };
             return View(model);
         }
@@ -91,7 +93,7 @@ namespace GrandApp.Controllers
             User user = await _context.Users.FindAsync(id);
 
             if (_context.Users
-                .Where(f => f.Email == model.Email && f.Id != model.Id)
+                .Where(f => (f.Email == model.Email || f.Nickname == model.Nickname) && f.Id != model.Id)
                 .FirstOrDefault() != null)
             {
                 ModelState.AddModelError("", "Введенный пользователь уже существует");
@@ -105,6 +107,7 @@ namespace GrandApp.Controllers
                     user.UserName = model.Email;
                     user.LastName = model.LastName;
                     user.FirstName = model.FirstName;
+                    user.Nickname = model.Nickname;
                     _context.Update(user);
                     await _context.SaveChangesAsync();
                 }

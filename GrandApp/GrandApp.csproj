@@ -26,6 +26,8 @@
 
   <ItemGroup>
     <Folder Include="Migrations\" />
+    <Folder Include="ViewModels\Reservations\" />
+    <Folder Include="ViewModels\RoomPrices\" />
   </ItemGroup>
 
 </Project>

@@ -1,16 +1,13 @@
-﻿using Microsoft.AspNetCore.Identity;
-using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace GrandApp.Models.Data
 {
     public class RoomPrice
     {
-        public int ID { get; set; }
-
-        [Required(ErrorMessage = "Введите идентифкатор категории")]
-        [Display(Name = "Идентифкатор катгории")]
-        public string IdCategory { get; set; }
+        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Display(Name = "ИД")]
+        public int Id { get; set; }
 
         [Required(ErrorMessage = "Введите стоимость на 1м кв")]
         [Display(Name = "Стоимость на 1м кв")]
@@ -18,6 +15,14 @@ namespace GrandApp.Models.Data
 
         [Required(ErrorMessage = "Введите дату установки цены")]
         [Display(Name = "Дата установки цены")]
-        public DateTime PriceSettingdateTime { get; set; }
+        public DateTime PriceSettingdateTime { get; set; } = DateTime.Now;
+
+        [Required]
+        [Display(Name = "Категория")]
+        public byte IdRoomCategory { get; set; }
+
+        [Display(Name = "Категория")]
+        [ForeignKey("IdRoomCategory")]
+        public RoomCategory RoomCategory { get; set; }
     }
 }

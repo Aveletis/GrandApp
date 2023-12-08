@@ -1,4 +1,4 @@
-﻿@model IEnumerable<GrandApp.Models.Data.Room>
+﻿@model IEnumerable<GrandApp.Models.Data.Reservation>
 
 @{
     ViewData["Title"] = "Index";
@@ -13,26 +13,20 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Number)
+                @Html.DisplayNameFor(model => model.ArrivaldateTime)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Image)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Floor)
+                @Html.DisplayNameFor(model => model.DeparturedateTime)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.NumberGuests)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Square)
+                @Html.DisplayNameFor(model => model.Room)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Description)
+                @Html.DisplayNameFor(model => model.User)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IdRoomCategory)
-            </th>       
             <th></th>
         </tr>
     </thead>
@@ -40,26 +34,20 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Number)
+                @Html.DisplayFor(modelItem => item.ArrivaldateTime)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Image)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Floor)
+                @Html.DisplayFor(modelItem => item.DeparturedateTime)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.NumberGuests)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Square)
+                @Html.DisplayFor(modelItem => item.IdRoom)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Description)
+                @Html.DisplayFor(modelItem => item.IdUser)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RoomCategory.Category)
-            </td
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.Id">Details</a> |

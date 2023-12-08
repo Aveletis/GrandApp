@@ -19,5 +19,9 @@ namespace GrandApp.ViewModels.Users
         [Required(ErrorMessage = "Введите имя")]
         [Display(Name = "Имя")]
         public string FirstName { get; set; }
+
+        [Required(ErrorMessage = "Введите никнейм")]
+        [Display(Name = "Никнейм")]
+        public string Nickname { get; set; }
     }
 }

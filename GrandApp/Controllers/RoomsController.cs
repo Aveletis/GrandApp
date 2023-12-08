@@ -1,7 +1,9 @@
 ﻿using GrandApp.Models;
 using GrandApp.Models.Data;
-using GrandApp.ViewModels.Room;
+using GrandApp.ViewModels.Rooms;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.CodeAnalysis;
 using Microsoft.EntityFrameworkCore;
 
 namespace GrandApp.Controllers
@@ -33,7 +35,7 @@ namespace GrandApp.Controllers
             }
 
             var Rooms = await _context.Rooms
-                .FirstOrDefaultAsync(m => m.ID == id);
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (Rooms == null)
             {
                 return NotFound();
@@ -45,6 +47,7 @@ namespace GrandApp.Controllers
         // GET: Rooms/Create
         public IActionResult Create()
         {
+            ViewData["IdRoomCategory"] = new SelectList(_context.RoomCategories, "Id", "Category");
             return View();
         }
 
@@ -76,6 +79,9 @@ namespace GrandApp.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["IdRoomCategory"] = new SelectList(
+                _context.RoomCategories,
+                "Id", "Category", model.IdRoomCategory);
             return View(model);
         }
 
@@ -95,7 +101,7 @@ namespace GrandApp.Controllers
 
             EditRoomsViewModel model = new()
             {
-                Id = room.ID,
+                Id = room.Id,
                 Number = room.Number,
                 Image = room.Image,
                 Floor = room.Floor,
@@ -104,6 +110,9 @@ namespace GrandApp.Controllers
                 Description = room.Description,
                 IdRoomCategory = room.IdRoomCategory
             };
+            ViewData["IdRoomCategory"] = new SelectList(
+                _context.RoomCategories,
+                "Id", "Category", room.IdRoomCategory);
             return View(model);
         }
 
@@ -115,7 +124,7 @@ namespace GrandApp.Controllers
             Room room = await _context.Rooms.FindAsync(id);
 
             if (_context.Rooms
-                .Where(f => f.Number == model.Number && f.ID != model.Id)
+                .Where(f => f.Number == model.Number && f.Id != model.Id)
                 .FirstOrDefault() != null)
             {
                 ModelState.AddModelError("", "Введенная комната уже существует");
@@ -137,7 +146,7 @@ namespace GrandApp.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!RoomExists(room.ID))
+                    if (!RoomExists(room.Id))
                     {
                         return NotFound();
                     }
@@ -148,25 +157,28 @@ namespace GrandApp.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["IdRoomCategory"] = new SelectList(
+                _context.RoomCategories,
+                "Id", "Category", room.IdRoomCategory);
             return View(model);
         }
 
         // GET: Rooms/Delete/5
         public async Task<IActionResult> Delete(byte? id)
         {
-            if (id == null || _context.RoomCategories == null)
+            if (id == null || _context.Rooms == null)
             {
                 return NotFound();
             }
 
-            var roomCategory = await _context.RoomCategories
-                .FirstOrDefaultAsync(m => m.ID == id);
-            if (roomCategory == null)
+            var room = await _context.Rooms
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (room == null)
             {
                 return NotFound();
             }
 
-            return View(roomCategory);
+            return View(room);
         }
 
         // POST: Rooms/Delete/5
@@ -183,14 +195,14 @@ namespace GrandApp.Controllers
             {
                 _context.Rooms.Remove(room);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool RoomExists(byte id)
         {
-          return (_context.Rooms?.Any(e => e.ID == id)).GetValueOrDefault();
+            return (_context.Rooms?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

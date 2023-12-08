@@ -40,13 +40,13 @@
                 @Html.DisplayFor(modelItem => item.Description)
             </td>
                 <td class="noUnderlining">
-                <a asp-action="Edit" asp-route-id="@item.ID" title="Редактировать">
+                <a asp-action="Edit" asp-route-id="@item.Id" title="Редактировать">
                     <i class="fa-solid fa-pencil fa-lg"></i>
                 </a>
-                <a asp-action="Details" asp-route-id="@item.ID" title="Подробнее">
+                <a asp-action="Details" asp-route-id="@item.Id" title="Подробнее">
                     <i class="fa-regular fa-eye fa-lg"></i>
                 </a>
-                <a asp-action="Delete" asp-route-id="@item.ID" title="Удалить">
+                <a asp-action="Delete" asp-route-id="@item.Id" title="Удалить">
                     <i class="far fa-minus-square"></i>
                 </a>
             </td>

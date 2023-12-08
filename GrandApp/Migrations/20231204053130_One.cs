@@ -56,14 +56,14 @@ namespace GrandApp.Migrations
                 name: "RoomCategories",
                 columns: table => new
                 {
-                    ID = table.Column<byte>(type: "tinyint", nullable: false)
+                    Id = table.Column<byte>(type: "tinyint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Category = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_RoomCategories", x => x.ID);
+                    table.PrimaryKey("PK_RoomCategories", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -176,7 +176,7 @@ namespace GrandApp.Migrations
                 name: "Rooms",
                 columns: table => new
                 {
-                    ID = table.Column<byte>(type: "tinyint", nullable: false),
+                    Id = table.Column<byte>(type: "tinyint", nullable: false),
                     Number = table.Column<int>(type: "int", nullable: false),
                     Image = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Floor = table.Column<byte>(type: "tinyint", nullable: false),
@@ -187,12 +187,12 @@ namespace GrandApp.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Rooms", x => x.ID);
+                    table.PrimaryKey("PK_Rooms", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Rooms_RoomCategories_IdCategoryID",
                         column: x => x.IdCategoryID,
                         principalTable: "RoomCategories",
-                        principalColumn: "ID",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 

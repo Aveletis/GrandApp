@@ -9,6 +9,10 @@ namespace GrandApp.ViewModels.Account
         [DataType(DataType.EmailAddress)]   // тип элемента управления на странице
         public string Email { get; set; }
 
+        [Required(ErrorMessage = "Введите никнейм")]
+        [Display(Name = "Никнейм")]
+        public string Nickname { get; set; }
+
         [Required(ErrorMessage = "Введите фамилию")]
         [Display(Name = "Фамилия")]
         public string LastName { get; set; }

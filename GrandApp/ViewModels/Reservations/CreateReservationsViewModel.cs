@@ -1,10 +1,8 @@
-﻿using GrandApp.Models.Data;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace GrandApp.ViewModels.Booking
+namespace GrandApp.ViewModels.Reservations
 {
-    public class CreateBookingViewModel
+    public class CreateReservationsViewModel
     {
         [Required(ErrorMessage = "Введите дату заезда")]
         [Display(Name = "Дата заезда")]
@@ -18,14 +16,12 @@ namespace GrandApp.ViewModels.Booking
         [Display(Name = "Кол-во гостей")]
         public byte NumberGuests { get; set; }
 
-        [Required(ErrorMessage = "Введите номер")]
-        [Display(Name = "Идентификатор номера")]
-        public Room IdRoom { get; set; }
+        [Required]
+        [Display(Name = "Номер")]
+        public byte IdRoom { get; set; }
 
         [Required]
+        [Display(Name = "Пользователь")]
         public string IdUser { get; set; }
-
-        [ForeignKey("IdUser")]
-        public User User { get; set; }
     }
 }

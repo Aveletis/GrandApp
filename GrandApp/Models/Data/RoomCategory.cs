@@ -7,7 +7,7 @@ namespace GrandApp.Models.Data
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Display(Name = "ИД")]
-        public byte ID { get; set; }
+        public byte Id { get; set; }
 
         [Required(ErrorMessage = "Введите категорию")]
         [Display(Name = "Категория")]
@@ -16,5 +16,11 @@ namespace GrandApp.Models.Data
         [Required(ErrorMessage = "Введите описание")]
         [Display(Name = "Описание")]
         public string Description { get; set; }
+
+        [Required]
+        public ICollection<Room> Rooms { get; set; }
+
+        [Required]
+        public ICollection<RoomPrice> RoomPrices { get; set; }
     }
 }
